@@ -1,0 +1,6 @@
+pl\componentprogramming\sudokugame\SudokuBoardTest.class
+pl\componentprogramming\sudokugame\SudokuColumnTest.class
+pl\componentprogramming\sudokugame\SudokuFieldTest.class
+pl\componentprogramming\sudokugame\BacktrackingSudokuSolverTest.class
+pl\componentprogramming\sudokugame\SudokuDifficultySetterTest.class
+pl\componentprogramming\sudokugame\SudokuGroupTest.class

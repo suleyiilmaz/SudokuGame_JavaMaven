@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.18">
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Dao\src\main\java\pl\componentprogramming\dao\Dao.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Dao\src\main\java\pl\componentprogramming\dao\DaoStreamException.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Dao\src\main\java\pl\componentprogramming\dao\FileSudokuBoardDao.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Dao\src\main\java\pl\componentprogramming\dao\SudokuBoardDaoFactory.java">
+</file>
+</checkstyle>

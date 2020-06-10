@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.18">
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Model\src\main\java\pl\componentprogramming\sudokugame\BacktrackingSudokuSolver.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Model\src\main\java\pl\componentprogramming\sudokugame\SudokuBoard.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Model\src\main\java\pl\componentprogramming\sudokugame\SudokuBox.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Model\src\main\java\pl\componentprogramming\sudokugame\SudokuColumn.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Model\src\main\java\pl\componentprogramming\sudokugame\SudokuDifficulty.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Model\src\main\java\pl\componentprogramming\sudokugame\SudokuDifficultySetter.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Model\src\main\java\pl\componentprogramming\sudokugame\SudokuField.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Model\src\main\java\pl\componentprogramming\sudokugame\SudokuGroup.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Model\src\main\java\pl\componentprogramming\sudokugame\SudokuRow.java">
+</file>
+<file name="C:\Users\Erwan\Documents\NetBeansProjects\mkw_th_1015_04\Model\src\main\java\pl\componentprogramming\sudokugame\SudokuSolver.java">
+</file>
+</checkstyle>

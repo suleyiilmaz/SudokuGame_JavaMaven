@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SudokuBoard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SudokuGame</a> &gt; <a href="index.source.html" class="el_package">pl.componentprogramming.sudokugame</a> &gt; <span class="el_source">SudokuBoard.java</span></div><h1>SudokuBoard.java</h1><pre class="source lang-java linenums">package pl.componentprogramming.sudokugame;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+/**
+ * Store and access to data of a Sudoku Board.
+ *
+ * @author student
+ */
+public class SudokuBoard implements Serializable, Cloneable {
+
+<span class="fc" id="L19">    private List&lt;SudokuField&gt; board = Arrays.asList(new SudokuField[81]);</span>
+
+    /**
+     * Creating the board.
+     */
+<span class="fc" id="L24">    public SudokuBoard() {</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        for (int i = 0; i &lt; 9; i++) {</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            for (int j = 0; j &lt; 9; j++) {</span>
+<span class="fc" id="L27">                this.board.set(i * 9 + j, new SudokuField());</span>
+            }
+        }
+<span class="fc" id="L30">    }</span>
+
+    /**
+     * Initialise a random row in the board with random numbers.
+     */
+    public void initialiseRandomRow() {
+<span class="fc" id="L36">        ArrayList&lt;Integer&gt; digits = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        for (int i = 1; i &lt;= 9; i++) {</span>
+<span class="fc" id="L38">            digits.add(i);</span>
+        }
+<span class="fc" id="L40">        Collections.shuffle(digits);</span>
+        //System.out.println(digits);
+<span class="fc" id="L42">        Random rand = new Random();</span>
+<span class="fc" id="L43">        int randomRow = rand.nextInt(9);</span>
+        //System.out.println(randomRow);
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for (int j = 0; j &lt; 9; j++) {</span>
+<span class="fc" id="L46">            this.board.get(randomRow * 9 + j).setFieldValue(digits.get(j));</span>
+        }
+<span class="fc" id="L48">    }</span>
+
+    /**
+     * Setting a value to a desired row and col.
+     *
+     * @param row Number of the row
+     * @param col Number of the column
+     * @param digit Value
+     * @return true if the number as been set.
+     */
+    public boolean set(int row, int col, int digit) {
+<span class="fc" id="L59">        boolean res = false;</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (canBePlacedHere(row, col, digit)) {</span>
+<span class="fc" id="L61">            this.board.get(row * 9 + col).setFieldValue(digit);</span>
+<span class="fc" id="L62">            res = true;</span>
+        }
+<span class="fc" id="L64">        return res;</span>
+    }
+
+    /**
+     * Getting a value from a desired row and col.
+     *
+     * @param row Number of the row
+     * @param col Number of the column
+     * @return the value at the row and column position.
+     */
+    public int get(int row, int col) {
+<span class="fc" id="L75">        return this.board.get(row * 9 + col).getFieldValue();</span>
+    }
+
+    /**
+     * Return true if the digit is already on the specified row.
+     *
+     * @param row Number of the row
+     * @param digit Value
+     * @return
+     */
+    private boolean onRow(int row, int digit) {
+<span class="fc" id="L86">        int i = 0;</span>
+<span class="fc" id="L87">        boolean res = false;</span>
+<span class="fc bfc" id="L88" title="All 4 branches covered.">        while (i &lt; 9 &amp;&amp; !res) {</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            if (this.get(row, i) == digit) {</span>
+<span class="fc" id="L90">                res = true;</span>
+            }
+<span class="fc" id="L92">            i++;</span>
+        }
+<span class="fc" id="L94">        return res;</span>
+    }
+
+    /**
+     * Return true if the digit is already on the specified column.
+     *
+     * @param col Number of the column
+     * @param digit Value
+     * @return
+     */
+    private boolean onColumn(int col, int digit) {
+<span class="fc" id="L105">        int i = 0;</span>
+<span class="fc" id="L106">        boolean res = false;</span>
+<span class="fc bfc" id="L107" title="All 4 branches covered.">        while (i &lt; 9 &amp;&amp; !res) {</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">            if (this.get(i, col) == digit) {</span>
+<span class="fc" id="L109">                res = true;</span>
+            }
+<span class="fc" id="L111">            i++;</span>
+        }
+<span class="fc" id="L113">        return res;</span>
+    }
+
+    /**
+     * Return true if the digit is already on the square with the specified row
+     * and column.
+     *
+     * @param row Number of the row
+     * @param col Number of the column
+     * @param digit Value
+     * @return
+     */
+    private boolean onSquare(int row, int col, int digit) {
+<span class="fc" id="L126">        int squareRow = firstNumberOfSquare(row);</span>
+<span class="fc" id="L127">        int squareCol = firstNumberOfSquare(col);</span>
+<span class="fc" id="L128">        int i = squareRow;</span>
+<span class="fc" id="L129">        int j = squareCol;</span>
+<span class="fc" id="L130">        boolean res = false;</span>
+<span class="fc bfc" id="L131" title="All 4 branches covered.">        while (i &lt; squareRow + 3 &amp;&amp; !res) {</span>
+<span class="fc bfc" id="L132" title="All 4 branches covered.">            while (j &lt; squareCol + 3 &amp;&amp; !res) {</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">                if (this.get(i, j) == digit) {</span>
+<span class="fc" id="L134">                    res = true;</span>
+                }
+<span class="fc" id="L136">                j++;</span>
+            }
+<span class="fc" id="L138">            j = squareCol;</span>
+<span class="fc" id="L139">            i++;</span>
+        }
+<span class="fc" id="L141">        return res;</span>
+    }
+
+    /**
+     * Return the upper left corner of a square.
+     *
+     * @param number It can be thr number of a row or a column
+     * @return
+     */
+    private int firstNumberOfSquare(int number) {
+<span class="fc" id="L151">        int res = 6;</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        if (number &lt; 3) {</span>
+<span class="fc" id="L153">            res = 0;</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">        } else if (number &lt; 6) {</span>
+<span class="fc" id="L155">            res = 3;</span>
+        }
+<span class="fc" id="L157">        return res;</span>
+    }
+
+    /**
+     * Return true if the digits is not on the row, the column and the square.
+     *
+     * @param row Number of row
+     * @param col Number of column
+     * @param digit Value
+     * @return
+     */
+    private boolean canBePlacedHere(int row, int col, int digit) {
+<span class="fc" id="L169">        boolean res = false;</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">        if (digit != 0) {</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">            if (!onRow(row, digit)) {</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">                if (!onColumn(col, digit)) {</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">                    if (!onSquare(row, col, digit)) {</span>
+<span class="fc" id="L174">                        res = true;</span>
+                    }
+                }
+            }
+        } else {
+<span class="fc" id="L179">            res = true;</span>
+        }
+<span class="fc" id="L181">        return res;</span>
+    }
+
+    /**
+     * Return the board into a String.
+     *
+     * @return a string of the board
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L191">        String res = &quot;&quot;;</span>
+
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        for (int i = 0; i &lt; 9; i++) {</span>
+<span class="fc" id="L194">            String row = &quot;&quot;;</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">            for (int j = 0; j &lt; 9; j++) {</span>
+<span class="fc" id="L196">                row += &quot; &quot; + this.get(i, j) + &quot; &quot;;</span>
+            }
+<span class="fc" id="L198">            res += &quot;\n&quot; + row;</span>
+        }
+<span class="fc" id="L200">        return res;</span>
+    }
+
+    /**
+     * Check if the board is correct.
+     *
+     * @return true if it's correct
+     */
+    private boolean checkBoard() {
+<span class="nc" id="L209">        int i = 0;</span>
+<span class="nc" id="L210">        boolean ok = true;</span>
+<span class="nc bnc" id="L211" title="All 4 branches missed.">        while (i &lt; 9 &amp;&amp; ok) {</span>
+<span class="nc" id="L212">            int j = 0;</span>
+<span class="nc bnc" id="L213" title="All 4 branches missed.">            while (j &lt; 9 &amp;&amp; ok) {</span>
+<span class="nc" id="L214">                int digit = get(i, j);</span>
+<span class="nc" id="L215">                set(i, j, 0);</span>
+<span class="nc" id="L216">                ok = set(i, j, digit);</span>
+<span class="nc" id="L217">                j++;</span>
+<span class="nc" id="L218">            }</span>
+<span class="nc" id="L219">            i++;</span>
+<span class="nc" id="L220">        }</span>
+<span class="nc" id="L221">        return ok;</span>
+    }
+
+    /**
+     * Return an object SudokuRow of the given row.
+     *
+     * @param row number
+     * @return SudokuRow
+     */
+    public SudokuRow getRow(int row) {
+<span class="fc" id="L231">        List&lt;SudokuField&gt; rowField = Arrays.asList(new SudokuField[9]);</span>
+<span class="fc bfc" id="L232" title="All 2 branches covered.">        for (int i = 0; i &lt; 9; i++) {</span>
+<span class="fc" id="L233">            rowField.set(i, this.board.get(row * 9 + i));</span>
+        }
+<span class="fc" id="L235">        SudokuRow sudokuRow = new SudokuRow(rowField);</span>
+<span class="fc" id="L236">        return sudokuRow;</span>
+    }
+
+    /**
+     * Return an object SudokuColumn of the given column.
+     *
+     * @param col number
+     * @return SudokuColumn
+     */
+    public SudokuColumn getColumn(int col) {
+<span class="fc" id="L246">        List&lt;SudokuField&gt; colField = Arrays.asList(new SudokuField[9]);</span>
+<span class="fc bfc" id="L247" title="All 2 branches covered.">        for (int i = 0; i &lt; 9; i++) {</span>
+<span class="fc" id="L248">            colField.set(i, this.board.get(i * 9 + col));</span>
+        }
+<span class="fc" id="L250">        SudokuColumn sudokuCol = new SudokuColumn(colField);</span>
+<span class="fc" id="L251">        return sudokuCol;</span>
+    }
+
+    /**
+     * Return an object SudokuBox of the given row and col.
+     *
+     * @param row number
+     * @param col number
+     * @return SudokuBox
+     */
+    public SudokuBox getBox(int row, int col) {
+<span class="fc" id="L262">        List&lt;SudokuField&gt; boxField = Arrays.asList(new SudokuField[9]);</span>
+<span class="fc" id="L263">        int squareRow = firstNumberOfSquare(row);</span>
+<span class="fc" id="L264">        int squareCol = firstNumberOfSquare(col);</span>
+<span class="fc" id="L265">        int pos = 0;</span>
+<span class="fc bfc" id="L266" title="All 2 branches covered.">        for (int i = squareRow; i &lt; squareRow + 3; i++) {</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">            for (int j = squareCol; j &lt; squareCol + 3; j++) {</span>
+<span class="fc" id="L268">                boxField.set(pos, this.board.get(i * 9 + j));</span>
+<span class="fc" id="L269">                pos++;</span>
+            }
+        }
+<span class="fc" id="L272">        SudokuBox sudokuBox = new SudokuBox(boxField);</span>
+<span class="fc" id="L273">        return sudokuBox;</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L278" title="All 2 branches covered.">        if (o == null) {</span>
+<span class="fc" id="L279">            return false;</span>
+        }
+<span class="fc bfc" id="L281" title="All 2 branches covered.">        if (o == this) {</span>
+<span class="fc" id="L282">            return true;</span>
+        }
+<span class="fc bfc" id="L284" title="All 2 branches covered.">        if (!(o instanceof SudokuBoard)) {</span>
+<span class="fc" id="L285">            return false;</span>
+        }
+
+<span class="fc" id="L288">        SudokuBoard sudokuBoard = (SudokuBoard) o;</span>
+
+<span class="fc" id="L290">        return new EqualsBuilder()</span>
+<span class="fc" id="L291">                .append(board, sudokuBoard.board)</span>
+<span class="fc" id="L292">                .isEquals();</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L297">        return new HashCodeBuilder(11, 45)</span>
+<span class="fc" id="L298">                .append(board)</span>
+<span class="fc" id="L299">                .toHashCode();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

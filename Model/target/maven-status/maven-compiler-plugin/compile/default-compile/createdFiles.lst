@@ -1,0 +1,11 @@
+pl\componentprogramming\sudokugame\SudokuDifficultySetter.class
+pl\componentprogramming\sudokugame\SudokuBoard.class
+pl\componentprogramming\sudokugame\SudokuField.class
+pl\componentprogramming\sudokugame\SudokuColumn.class
+pl\componentprogramming\sudokugame\BacktrackingSudokuSolver.class
+pl\componentprogramming\sudokugame\SudokuDifficultySetter$1.class
+pl\componentprogramming\sudokugame\SudokuGroup.class
+pl\componentprogramming\sudokugame\SudokuBox.class
+pl\componentprogramming\sudokugame\SudokuRow.class
+pl\componentprogramming\sudokugame\SudokuSolver.class
+pl\componentprogramming\sudokugame\SudokuDifficulty.class
